@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/vogue');
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Italic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza thin.woff2') format('woff2');
+            font-weight: 100;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Thin Italic.woff2') format('woff2');
+            font-weight: 100;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium Italic.woff2') format('woff2');
+            font-weight: 500;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="box-border m-0 bg-black">
+    <div id="register-header-box" class="relative flex w-full py-6 px-4 md:px-20 justify-center items-center bg-[#141414]" >
+        <div id="back-wrapper" class="absolute left-4 md:left-[5vw] flex justify-center items-center">
+            <a href="{% url 'account_logout' %}" id="back-logout" class="flex items-center gap-2 border border-white p-2 md:py-3 md:px-6 text-[#FFF] font-['Lorenza'] text-base font-normal not-italic leading-normal">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 16" fill="none">
+                    <path d="M12 15L5 8L12 1" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 8H5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="hidden md:inline">Back</span>
+                
+            </a>
+            
+        </div>
+        <div id="register-header" class="text-[#FFF] text-center font-['VOgue'] text-2xl md:text-[2.5rem] not-italic font-normal leading-normal [--webkit-text-stroke-width:0.19px] [--webkit-text-stroke-color:#FFF]">
+            VOGUE NATION
+        </div>
+    </div>
+    <div class="container mx-auto sm:max-w-[50vw] my-5 p-8">
+        <div id="registration-info-container" class="flex flex-col mb-5">
+            <div id="register-form-header" class="text-[#FFF] self-stretch text-center font-['Vogue'] text-3xl not-italic font-normal leading-normal [--webkit-text-stroke-width:0.19px] [--webkit-text-stroke-color:#FFF]">
+                REGISTRATION FORM
+            </div>
+            <div id="register-info-para" class="text-white/60 text-center font-['Lorenza'] text-base font-normal not-italic leading-normal">
+                Non occaecat ut eu ullamco cupidatat deserunt incididunt laborum dolore sunt sint occaecat cillum Lorem eu. Tempor voluptate laboris enim excepteur ipsum ex incididunt quis labore et fugiat minim elit. Qui aliqua mollit et minim. Sit labore incididunt sint Lorem cillum occaecat est culpa irure amet.
+            </div>
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="p-6">
+                <div class="flex border-b border-gray-600">
+                            
+                            {% for radio in team_form.competition %}
+                            <div class="flex-1">
+                                {{ radio.tag }}
+                                
+                                <label for="{{ radio.id_for_label }}" 
+                                       class="block w-full cursor-pointer p-4 text-center text-gray-400 font-['Lorenza'] peer-checked:bg-white peer-checked:text-black transition-colors">
+                                    {{ radio.choice_label }}
+                                </label>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                
+                {% if team_form.non_field_errors %}
+                    <div class="p-3 mb-4 bg-red-100 text-red-700 rounded-md">
+                        {{ team_form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="flex flex-col py-8 gap-y-[3.75rem]">
+                    <div id="team-section">
+                        <div class="flex flex-col gap-y-3 mb-9">
+                            <label for="{{ team_form.team_name.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Team Name</label>
+                            {{ team_form.team_name }}
+                            {% if team_form.team_name.errors %}<p class="text-red-500">{{ team_form.team_name.errors|first }}</p>{% endif %}
+                        </div>
+                        {% comment %} <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ team_form.competition.label }}</label>
+                            
+                            
+                        </div> {% endcomment %}
+                        <div class="flex flex-col gap-y-3 mb-3">
+                            <label for="{{ team_form.prev_performance.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Submit your performance(s)</label>
+                            {{ team_form.prev_performance }}
+                        </div>
+                    </div>
+                    {% comment %} <hr class="md:col-span-2 my-2"> {% endcomment %}
+                    <div id="lead-section">
+                        <div id="lead-section-header-wrapper" class="flex py-2.5 items-center gap-2.5 self-stretch border-b border-white/40 mb-[2.75rem]">
+                            <div id="lead-section-header" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 uppercase">
+                                LEADER DETAILS
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-y-3 mb-9">
+                            <label for="{{ team_form.lead_name.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Full Name</label>
+                            {{ team_form.lead_name }}
+                        </div>
+                        <div id="lead-contact-gender-wrapper" class="flex flex-row justify-between mb-9">
+                            <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                <label for="{{ team_form.lead_phone.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Contact No. </label>
+                                {{ team_form.lead_phone }}
+                            </div>
+                            <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                <label for="{{ team_form.lead_gender.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">
+                                    Gender
+                                </label>
+                                {{ team_form.lead_gender }}
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-y-3 mb-9">
+                            <span class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Email Address</span>
+                            <p class="w-full p-4 bg-white/20 text-white font-['Lorenza'] self-stretch text-white/50 text-base not-italic font-normal leading-4">{{ leader_email }}</p>
+                            <input type="hidden" name="lead_email" value="{{ leader_email }}">
+                        </div>
+                        <div class="flex flex-col gap-y-3 mb-9">
+                            <label for="{{ team_form.lead_postal_code.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">
+                                Postal Code
+                            </label>
+                            {{ team_form.lead_postal_code }}
+                        </div>
+                        <div class="flex flex-col gap-y-3 mb-9">
+                            <label for="{{ team_form.lead_city.id_for_label }}" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">
+                                Enter your city
+                            </label>
+                            {{ team_form.lead_city }}
+                        </div>
+                    </div>
+        
+                    {% comment %} <div id="member-section"></div> {% endcomment %}
+                    
+                </div>
+                <div id="member-section-header-wrapper" class="flex py-2.5 items-center gap-2.5 self-stretch border-b border-white/40">
+                    <div id="member-section-header" class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 uppercase">
+                        MEMBER DETAILS
+                    </div>
+                </div>
+            </div>
+
+            {{ member_formset.management_form }}
+            
+            {% if member_formset.non_form_errors %}
+                <div class="p-3 mb-4 bg-red-100 text-red-700">
+                    {{ member_formset.non_form_errors }}
+                </div>
+            {% endif %}
+
+            <div id="member-forms-container">
+                {% for form in member_formset %}
+                    <div class="member-form mb-6 p-6 relative">
+                        <h3 class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 uppercase mb-[2.25rem]">Team Member #<span class="member-form-count">{{ forloop.counter }}</span></h3>
+                        {{ form.id }}
+                        <div class="flex flex-col gap-y-3 mb-3">
+                            <div class="flex flex-col gap-y-3 mb-3">
+                                <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Full Name</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}<p class="text-red-500 text-xs mt-1">{{ form.name.errors|first }}</p>{% endif %}
+                            </div>
+                            <div id="member-contact-gender-wrapper" class="flex flex-row justify-between mb-3">
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Email Address</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ form.email.errors|first }}</p>{% endif %}
+                                </div>
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Contact No.</label>
+                                    {{ form.phone_number }}
+                                </div>
+                            </div>
+                            <div id="member-gender-postal-wrapper" class="flex flex-row justify-between mb-3">
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Gender</label>
+                                    {{ form.gender }}
+                                </div>
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Postal Code</label>
+                                    {{ form.Postal_code }}
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-y-3 mb-3">
+                                <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Enter your City</label>
+                                {{ form.your_city }}
+                            </div>
+                            
+                             {% comment %} <div>
+                                <label class="block text-sm font-medium text-gray-700">{{ form.role.label }}</label>
+                                {{ form.role }}
+                            </div>
+                             <div>
+                                <label class="block text-sm font-medium text-gray-700">{{ form.competition.label }}</label>
+                                {{ form.competition }}
+                            </div> {% endcomment %}
+                             
+                        </div>
+                        {% if member_formset.can_delete %}
+                            <div class="absolute top-4 right-4 flex items-center">
+                                <label for="{{ form.DELETE.id_for_label }}" class="text-white/60 font-['Lorenza'] text-[1rem] not-italic font-normal leading-4 self-stretch pr-2">Remove</label>
+                                {{ form.DELETE }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div id="empty-form" class="hidden">
+                <div class="member-form mb-6 p-6 relative">
+                     <h3 class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 uppercase mb-[2.25rem]">Team Member #<span class="member-form-count"></span></h3>
+                    {{ member_formset.empty_form.id }}
+                    <div class="flex flex-col gap-y-3 mb-3">
+                        {% comment %} <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.name.label }}</label>
+                            {{ member_formset.empty_form.name }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.email.label }}</label>
+                            {{ member_formset.empty_form.email }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.phone_number.label }}</label>
+                            {{ member_formset.empty_form.phone_number }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.your_city.label }}</label>
+                            {{ member_formset.empty_form.your_city }}
+                        </div>
+                         <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.gender.label }}</label>
+                            {{ member_formset.empty_form.gender }}
+                        </div> {% endcomment %}
+                        {% comment %} <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.role.label }}</label>
+                            {{ member_formset.empty_form.role }}
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.competition.label }}</label>
+                            {{ member_formset.empty_form.competition }}
+                        </div> {% endcomment %}
+                        {% comment %} <div>
+                            <label class="block text-sm font-medium text-gray-700">{{ member_formset.empty_form.Postal_code.label }}</label>
+                            {{ member_formset.empty_form.Postal_code }}
+                        </div> {% endcomment %}
+                        <div class="flex flex-col gap-y-3 mb-3">
+                                <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Full Name</label>
+                                {{ member_formset.empty_form.name }}
+                                {% if member_formset.empty_form.name.errors %}<p class="text-red-500 text-xs mt-1">{{ member_formset.empty_form.errors|first }}</p>{% endif %}
+                            </div>
+                            <div id="member-contact-gender-wrapper" class="flex flex-row justify-between mb-3">
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Email Address</label>
+                                    {{ member_formset.empty_form.email }}
+                                    {% if member_formset.empty_form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ member_formset.empty_form.email.errors|first }}</p>{% endif %}
+                                </div>
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Contact No.</label>
+                                    {{ member_formset.empty_form.phone_number }}
+                                </div>
+                            </div>
+                            <div id="member-gender-postal-wrapper" class="flex flex-row justify-between mb-3">
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Gender</label>
+                                    {{ member_formset.empty_form.gender }}
+                                </div>
+                                <div class="flex flex-col gap-y-3 mb-3 w-[45%]">
+                                    <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Postal Code</label>
+                                    {{ member_formset.empty_form.Postal_code }}
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-y-3 mb-3">
+                                <label class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Enter your City</label>
+                                {{ member_formset.empty_form.your_city }}
+                            </div>
+                    </div>
+                    {% if member_formset.can_delete %}
+                        <div class="absolute top-4 right-4 flex items-center">
+                             <label class="text-white/60 font-['Lorenza'] text-[1rem] not-italic font-normal leading-4 self-stretch pr-2">Remove</label>
+                            {{ member_formset.empty_form.DELETE }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-between mt-8 gap-y-[0.5rem]">
+                <button type="button" id="add-member-btn" class="flex py-4 px-8 justify-center items-center gap-[0.74325rem] self-stretch border border-white">
+                    <span class="text-white font-['Lorenza'] text-base not-italic font-normal leading-normal">Add Member &nbsp;&nbsp; +</span>
+                </button>
+                <button type="submit" class="flex py-4 px-8 justify-center items-center gap-[0.74325rem] self-stretch bg-white shadow-[0_0_14.8px_0_rgba(0,0,0,0.80),_0_0_44.2px_0_rgba(0,0,0,0.60)]">
+                    <span class="text-black font-['Lorenza'] text-base not-italic font-normal leading-normal">Register Now &nbsp;&#8594;</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addMemberBtn = document.getElementById('add-member-btn');
+            const container = document.getElementById('member-forms-container');
+            const emptyFormTemplate = document.getElementById('empty-form').innerHTML;
+            const totalFormsInput = document.querySelector('input[name="members-TOTAL_FORMS"]');
+            
+            addMemberBtn.addEventListener('click', function() {
+                const formCount = container.querySelectorAll('.member-form').length;
+                let newFormHtml = emptyFormTemplate.replace(/__prefix__/g, formCount);
+                
+                let tempDiv = document.createElement('div');
+                tempDiv.innerHTML = newFormHtml;
+                
+                // Update the count in the title of the new form
+                tempDiv.querySelector('.member-form-count').textContent = formCount + 1;
+                
+                container.insertAdjacentHTML('beforeend', tempDiv.innerHTML);
+                totalFormsInput.value = formCount + 1;
+            });
+        });
+    </script>
+</body>
+</html>

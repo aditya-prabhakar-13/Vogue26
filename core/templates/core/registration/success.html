@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/vogue');
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Italic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza thin.woff2') format('woff2');
+            font-weight: 100;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Thin Italic.woff2') format('woff2');
+            font-weight: 100;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium Italic.woff2') format('woff2');
+            font-weight: 500;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="box-border m-0 bg-black flex items-center justify-center h-screen w-full">
+    <div class="text-center p-10 bg-[#141414] flex flex-col gap-y-[2rem]">
+        {% comment %} <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {% endcomment %}
+        <h1 class="text-white text-center font-['Vogue'] text-5xl md:text-6xl not-italic font-normal leading-normal [-webkit-text-stroke:0.19px_white]">SUCCESS</h1>
+        <p class="text-white font-['Lorenza'] text-base not-italic font-normal leading-4 self-stretch">Your team has been registered successfully.</p>
+        <a href="{% url 'core:register_team' %}" class="flex py-4 px-8 justify-center items-center gap-[0.74325rem] self-stretch bg-white shadow-[0_0_14.8px_0_rgba(0,0,0,0.80),_0_0_44.2px_0_rgba(0,0,0,0.60)] text-black font-['Lorenza'] text-base not-italic font-normal leading-normal">Register Another Team</a>
+        <a href="{% url 'account_logout' %}" 
+           class="flex py-4 px-8 justify-center items-center gap-[0.74325rem] self-stretch border border-white text-white font-['Lorenza'] text-base not-italic font-normal leading-normal">
+            Logout and Go to Homepage
+        </a>
+    </div>
+</body>
+</html>

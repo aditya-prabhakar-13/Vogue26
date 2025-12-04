@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vogue Nation</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/vogue');
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Italic.woff2') format('woff2');
+            font-weight: 400;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza thin.woff2') format('woff2');
+            font-weight: 100;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Thin Italic.woff2') format('woff2');
+            font-weight: 100;
+            font-style: italic;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+
+        @font-face {
+            font-family: 'Lorenza';
+            src: url('fonts/Lorenza Medium Italic.woff2') format('woff2');
+            font-weight: 500;
+            font-style: italic;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body class="box-border m-0 bg-black ">
+
+
+    <div id="nav-wrapper" class="relative z-10 flex w-full pb-6 px-4 md:px-12 lg:px-24 xl:px-48 flex-col items-center gap-2.5 bg-[linear-gradient(180deg,_#000_0%,_#000_35.91%,_rgba(0,0,0,0.8)_40%,_transparent_100%)]">&nbsp;
+        <div id="nav" class="flex flex-col justify-center"></div>
+            <div id="nav-header" class="text-white text-center font-['Vogue'] text-5xl md:text-6xl not-italic font-normal leading-normal [-webkit-text-stroke:0.19px_white]">
+                VOGUE NATION
+            </div>
+            <div id="nav-buttons-wrapper" class="flex justify-center items-center gap-6 md:gap-12 self-stretch mt-4">
+                <a href="#gallery" id="nav-button-gallery" class="text-white text-right no-ligatures font-['Lorenza'] text-sm not-italic font-normal leading-7 tracking-[0.0175rem] uppercase">
+                    GALLERY
+                </a>
+                <a href="#footer" id="nav-button-contact" class="text-white text-right no-ligatures font-['Lorenza'] text-sm not-italic font-normal leading-7 tracking-[0.0175rem] uppercase">
+                    CONTACT US
+                </a>
+                <a href="" id="nav-button-rulebook" class="text-white text-right no-ligatures font-['Lorenza'] text-sm not-italic font-normal leading-7 tracking-[0.0175rem] uppercase">
+                    RULEBOOK
+                </a>
+            </div>
+    </div>
+    <div id="landing-landing" class="relative h-screen w-full absolute top-[-14vh] z-0">
+    
+        <div class="slide absolute top-0 left-0 h-full w-full bg-cover bg-center" style="background-image: url('{% static 'core/images/landing-placeholder-1.png' %}')"></div>
+        
+        <div class="slide absolute top-0 left-0 h-full w-full bg-cover bg-center" style="background-image: url('{% static 'core/images/landing-placeholder-2.png' %}')"></div>
+        <button id="prev-slide" class="absolute left-4 md:left-10 top-[40vh] -translate-y-1/2 z-20 text-white/70 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <button id="next-slide" class="absolute right-4 md:right-10 top-[40vh] -translate-y-1/2 z-20 text-white/70 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="vogue-intro-section" class="flex w-full py-24 md:py-32 lg:py-48 px-4 justify-center items-center bg-black">
+        <div id="vogue-intro" class="text-white text-center font-['Lorenza'] text-lg md:text-2xl not-italic font-normal leading-normal max-w-4xl">
+            Vogue Nation is Alcheringa’s grand fashion showdown — where style speaks <br> louder than words and the runway becomes your battlefield. Bring your boldest <br> looks, fiercest walk, and unstoppable flair to dazzle and make fashion history.
+        </div>
+    </div>
+
+    {% load socialaccount %}
+
+        {% comment %} Caution: Do not fuck below code Commmented now for dev purposes{% endcomment %}
+    {% comment %} <div class="text-center p-12 bg-white rounded-lg shadow-lg">
+        
+        {% if user.is_authenticated %}
+        
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome Back, {{ user.first_name }}!</h1>
+            {% if user.userprofile.profile_pic_url %}
+                <img src="{{ user.userprofile.profile_pic_url }}" alt="Your Profile Picture" class="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-blue-500">
+            {% endif %}
+            <a href="{% url 'core:register_team' %}" class="inline-block px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                Go to Team Registration
+            </a>
+            <a href="{% url 'account_logout' %}" class="inline-block mt-4 text-sm text-gray-500 hover:underline">Logout</a>
+
+        {% else %}
+
+            {% comment %} <h1 class="text-4xl font-bold text-gray-800 mb-4">Register for Vogue 26</h1>
+            <p class="text-gray-600 mb-8">Select your competition to begin registration.</p>
+            
+            <div class="space-y-4">
+                <a href="{% url 'core:register_for_competition' 'Glamour Nova' %}" class="block w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                    Register for Glamour Nova
+                </a>
+                <a href="{% url 'core:register_for_competition' 'Haute Couture' %}" class="block w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+                    Register for Haute Couture
+                </a>
+                <a href="{% url 'core:register_for_competition' 'State of Dress' %}" class="block w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700">
+                    Register for State of Dress
+                </a>
+            </div> {% endcomment %}
+            {% comment %} {% if user.is_authenticated %}
+        
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome Back, {{ user.first_name }}!</h1>
+            {% if user.userprofile.profile_pic_url %}
+                <img src="{{ user.userprofile.profile_pic_url }}" alt="Your Profile Picture" class="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-blue-500">
+            {% endif %}
+            <a href="{% url 'core:register_team' %}" class="inline-block px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                Go to Team Registration
+            </a>
+            <a href="{% url 'account_logout' %}" class="inline-block mt-4 text-sm text-gray-500 hover:underline">Logout</a>
+
+        {% else %} {% endcomment %}
+
+        <div class="register-container" >
+            <div class="panel">
+                <img src="{% static 'core/asset/centre-image.jpg' %}" alt="Glamour Nova" />
+                <div class="text">
+                <div class="text-content">
+                    <h2>GLAMOUR NOVA</h2>
+                    <p>
+                    Online Fashion Design and Photoshoot Competition.
+                    </p>
+                </div>
+                <a href="{% url 'core:register_for_competition' 'Glamour Nova' %}" class="btn">REGISTER NOW</a>
+                </div>
+            </div>
+
+      <div class="panel center">
+        <img src="{% static 'core/asset/right-image.jpg' %}" alt="Haute Couture" />
+        <div class="text">
+          <div class="text-content">
+            <h2>HAUTE COUTURE</h2>
+            <p>
+              Ever been stunned by someone so immaculately dressed that you run out of words? Haute Couture is where the most glamorous talents take the ramp, showcasing creative, theme-based fashion that inspires every designer to think bold and innovative.
+            </p>
+          </div>
+          <a href="{% url 'core:register_for_competition' 'Haute Couture' %}" class="btn">REGISTER NOW</a>
+        </div>
+      </div>
+
+            <div class="panel">
+                <img src="{% static 'core/asset/left-image.jpg' %}" alt="State of Dress" />
+                <div class="text">
+                <div class="text-content">
+                    <h2>STATE OF DRESS</h2>
+                    <p>
+                    Design the best outfit for your friend using trash. Use your origami and fasion skills to make the perfect dress!
+                    </p>
+                </div>
+                <a href="{% url 'core:register_for_competition' 'States of Dress' %}"  class="btn">REGISTER NOW</a>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} {% endif %} {% endcomment %}
+
+    <div class="blackcont" id="gallery">
+        <h2>ALBUM</h2>
+        <div class="images_cont">
+            <img src="{% static 'core/images/1.jpg' %}" alt="Image 1">
+            <img src="{% static 'core/images/2.jpg' %}" alt="Image 2">
+            <img src="{% static 'core/images/3.jpg' %}" alt="Image 3">
+            <img src="{% static 'core/images/4.png' %}" alt="Image 4">
+            <img src="{% static 'core/images/5.jpg' %}" alt="Image 5">
+        </div>
+
+    </div>
+
+    <div id="footer" class="flex flex-col bg-white w-full items-center relative overflow-hidden">
+        <div id="contact" class="flex flex-col items-center py-[2.94rem]">
+            <div id="vnconvenor-header" class="flex w-[10.25rem] flex-col items-center gap-[0.5rem] mb-[1rem]">
+                <div id="vnconv-name" class="text-black font-['Lorenza'] text-xl not-italic font-normal leading-[144%]">
+                    Ashmitha
+                </div>
+                <div id="vnconv-title" class="text-black font-['Lorenza'] text-base not-italic font-normal leading-[144%] self-stretch opacity-[0.6]">
+                    Vogue Nation Head
+                </div>
+            </div>
+            <div id="vnvonvenor-pfp-container" class="flex flex-col items-center relative w-[32.29756rem] mb-[4.71rem]">
+                <div id="vnconv-pfp-box" class="w-[12.25rem] h-[19.1875rem] aspect-[516.76/368.63] bg-gray-200 bg-center bg-cover bg-no-repeat" style="background-image: url('{% static 'core/images/ashmitha.jpg' %}')">
+                </div>
+                <div id="vnconv-contact-txt" class="text-white text-center font-['Vogue'] text-6xl not-italic font-normal leading-[122.3%] uppercase mix-blend-difference [font-feature-settings:'liga'_off,_'clig'_off] absolute bottom-[-3rem] z-1 nowrap">
+                    CONTACT US
+                </div>
+            </div>
+            <div id="pr-contacts" class="flex w-[20.25rem] justify-between items-center">
+                <div id="pr-email" class="flex items-center gap-[0.5rem] text-black/60 font-['Lorenza'] text-base not-italic font-normal leading-[144%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1rem] h-[16px]" viewBox="0 0 16 16" fill="none">
+                        <g opacity="0.6">
+                            <path d="M13.3333 2.6665H2.66659C1.93021 2.6665 1.33325 3.26346 1.33325 3.99984V11.9998C1.33325 12.7362 1.93021 13.3332 2.66659 13.3332H13.3333C14.0696 13.3332 14.6666 12.7362 14.6666 11.9998V3.99984C14.6666 3.26346 14.0696 2.6665 13.3333 2.6665Z" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.6666 4.6665L8.68659 8.4665C8.48077 8.59545 8.2428 8.66384 7.99992 8.66384C7.75704 8.66384 7.51907 8.59545 7.31325 8.4665L1.33325 4.6665" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                    </svg>
+                    vogue@alcheringa.co.in
+                </div>
+                <div id="pr-phone" class="flex items-center gap-[0.5rem] text-black/60 font-['Lorenza'] text-base not-italic font-normal leading-[144%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-[1rem] w-[1rem]" viewBox="0 0 16 16" fill="none">
+                        <g opacity="0.6">
+                            <path d="M4.36 3.33333C4.4 3.92667 4.5 4.50667 4.66 5.06L3.86 5.86C3.58667 5.06 3.41333 4.21333 3.35333 3.33333H4.36ZM10.9333 11.3467C11.5 11.5067 12.08 11.6067 12.6667 11.6467V12.64C11.7867 12.58 10.94 12.4067 10.1333 12.14L10.9333 11.3467ZM5 2H2.66667C2.3 2 2 2.3 2 2.66667C2 8.92667 7.07333 14 13.3333 14C13.7 14 14 13.7 14 13.3333V11.0067C14 10.64 13.7 10.34 13.3333 10.34C12.5067 10.34 11.7 10.2067 10.9533 9.96C10.8867 9.93333 10.8133 9.92667 10.7467 9.92667C10.5733 9.92667 10.4067 9.99333 10.2733 10.12L8.80667 11.5867C6.92 10.62 5.37333 9.08 4.41333 7.19333L5.88 5.72667C6.06667 5.54 6.12 5.28 6.04667 5.04667C5.8 4.3 5.66667 3.5 5.66667 2.66667C5.66667 2.3 5.36667 2 5 2Z" fill="black"/>
+                        </g>
+                    </svg>
+                    +91 89784 31975
+                </div>
+            </div>
+        </div>
+        <div class="h-[0.0625rem] opacity-20 bg-black w-full mb-[1rem]" id="hr-line"></div>
+        <div id="ccc" class="w-full flex flex-row justify-between px-[5.94rem] pb-[20.88356rem] max-sm:flex-col max-sm:px-[1rem] max-sm:gap-y-[1rem] max-sm:pb-[15rem]">
+            <div id="cc" class="flex gap-x-[4.87rem]">
+                <div id="cc1" class="text-black/[0.68] font-['Lorenza'] text-sm not-italic font-normal leading-normal">&copy;2026 ALCHERINGA</div>
+                <div id="cc2" class="text-black/[0.68] font-['Lorenza'] text-sm not-italic font-normal leading-normal">ALL RIGHTS RESERVED</div>
+            </div>
+            <div id="credits" class="flex flex-row gap-x-[0.5rem] max-sm:flex-col max-sm:items-center max-sm:gap-y-[1rem] max-sm:mt-[2rem]">
+                <span class="text-black/[0.68] font-['Lorenza'] text-sm not-italic font-normal leading-normal">Designed by Team Creatives.</span>
+                <span class="text-black/[0.68] font-['Lorenza'] text-sm not-italic font-normal leading-normal">Developed by Team WebOps</span>
+                 
+            </div>
+        </div>
+        <div id="vn-footer" class="text-black/10 text-justify font-['Vogue'] text-[9.5rem] md:text-[14.729rem] not-italic font-normal tracking-[-0.58919rem] uppercase [font-feature-settings:'liga'_off,_'clig'_off] w-full flex justify-center md:justify-between px-[0.5rem] absolute bottom-[-1.5rem] md:bottom-[-3rem] leading-none overflow-hidden">
+            <div>VOGUE</div>
+
+            <div class="hidden md:block">NATION</div>
+        </div>
+    </div>
+
+    {% comment %} Caution: Do not fuck above code {% endcomment %}
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        const tl = gsap.timeline({ paused: true }); 
+        
+        tl.to("#nav-wrapper", { 
+            paddingBottom: "1rem",
+            paddingTop: "1rem", 
+            gap: "0.5rem"  
+        })
+        .to("#nav-header", { 
+            fontSize: "1.875rem",
+            paddingTop: "1rem",
+        }, "<"); 
+
+        ScrollTrigger.create({
+            trigger: "body",            
+            start: "40vh top",        
+            end: "bottom bottom",     
+            toggleActions: "play none none reverse", 
+            pin: "#nav-wrapper",        
+            pinSpacing: false,          
+            invalidateOnRefresh: true,
+            animation: tl
+        });
+
+        const slides = gsap.utils.toArray(".slide");
+        let currentSlide = 0;
+        let isAnimating = false;
+        let autoPlayTimer; 
+
+        gsap.set(slides.slice(1), { autoAlpha: 0 }); 
+        function showSlide(index) {
+         
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+
+            if (isAnimating || index === currentSlide) {
+                return;
+            }
+
+            isAnimating = true; 
+            
+
+            if (autoPlayTimer) {
+                autoPlayTimer.kill();
+            }
+
+            const newSlideIndex = index;
+
+
+            gsap.to(slides[currentSlide], { 
+                autoAlpha: 0, 
+                duration: 1, 
+                onComplete: () => {
+
+                    gsap.to(slides[newSlideIndex], { 
+                        autoAlpha: 1, 
+                        duration: 1, 
+                        onComplete: () => {
+                            isAnimating = false; 
+
+                            startAutoPlay(); 
+                        }
+                    });
+
+                    currentSlide = newSlideIndex;
+                }
+            });
+        }
+
+
+        function startAutoPlay() {
+
+            autoPlayTimer = gsap.delayedCall(4, () => {
+                showSlide(currentSlide + 1);
+            });
+        }
+        
+
+        startAutoPlay();
+
+
+        document.getElementById("next-slide").addEventListener("click", () => {
+            if (isAnimating) return; 
+            showSlide(currentSlide + 1);
+        });
+
+        document.getElementById("prev-slide").addEventListener("click", () => {
+            if (isAnimating) return; 
+            showSlide(currentSlide - 1);
+        });
+
+        function smoothScrollTo(event, targetID) {
+            event.preventDefault(); // Stop the default #hash jump
+            
+
+            gsap.to(window, { 
+                duration: 1.5, 
+                scrollTo: { 
+                    y: targetID,  
+                    offsetY: -115  
+                }, 
+                ease: "power2.inOut" 
+            });
+        }
+
+
+        document.getElementById("nav-button-gallery").addEventListener("click", function(e) {
+            smoothScrollTo(e, "#gallery");
+        });
+    
+        document.getElementById("nav-button-contact").addEventListener("click", function(e) {
+            smoothScrollTo(e, "#footer");
+        });
+
+    </script>
+    <script src="{% static 'core/script.js' %}"></script>
+    <script src="{% static 'core/script2.js' %}"></script>
+
+</body>
+</html>
